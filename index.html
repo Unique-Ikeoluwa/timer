@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dist/style.css">
+    <title>Timer</title>
+</head>
+<body class="bg-[#0383a0] text-gray-900">
+    <div class="px-10">
+        <nav class="w-auto md:w-3/4 mx-auto px-1 md:px-5 py-2 bg-[#0383a2] flex flex-row justify-between items-center shadow-md">
+            <div class=" bg-gradient-to-r from-[#0292aa] to-[#a3dee4] bg-clip-text text-transparent text-xl md:text-3xl font-semibold">
+                <a href="#">UniT<span class="text-xl md:text-3xl">imer</span></a>
+            </div>
+            <div class="flex flex-row gap-2 md:gap-4 items-center">
+                <a href="" class="hidden md:block font-medium text-base text-gray-100 pr-1 md:pr-5">Settings</a>
+                <a href="" class="font-medium text-base bg-gradient-to-r rounded from-[#0292aa] to-[#a3dee4] py-1 px-1 md:px-3 shadow-md">Sign in</a>
+                <a href="" class="font-medium text-base bg-gradient-to-r rounded from-[#0292aa] to-[#a3dee4] py-1 px-1 md:px-3 shadow-md">Sign up</a>
+            </div>
+        </nav>
+        <div class="flex flex-col bg-[#0292aa] bg-opacity-5 justify-center items-center shadow-lg md:w-2/4 mx-auto py-6 mt-24 md:mt-44">
+            <h2 id="timing" class="font-bold text-5xl text-gray-100">00:00</h2>
+            <img src="/dist/img/download__3_-removebg-preview.png" class="mb-4" alt="">
+            <input type="number" id="time" placeholder="Input time in minute" class="p-2 mb-2 text-base rounded border border-gray-400 h-10 w-44 hover:border-2 hover:ease-in-out hover:delay-200 focus:outline-none focus:border-gray-500">
+            <input type="button" id="start" class="py-1 px-3 mb-3 shadow-lg text-lg text-gray-100 w-28 font-medium bg-gradient-to-r rounded from-[#a3dee4] to-[#0292aa] hover:font-bold" value="Start">
+        </div>
+        <footer class="flex justify-center items-center mt-56">
+            <p class="text-gray-100 text-sm md:text-md">© 2025 Unique —
+                <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-white ml-1" target="_blank">@ikeoluwa-unique</a>
+            </p>
+        </footer>
+    </div>
+    <script>
+        let start = document.getElementById("start")
+        let timing = document.getElementById("timing")
+        start.addEventListener("click", (e) =>{
+            e.preventDefault
+            let time = document.getElementById("time").value * 60
+            let interval = setInterval(() => {
+            timing.innerHTML = `${time}`
+            time--;
+            if (time <  0) {
+                clearInterval(timing.innerHTML);
+                timing.innerText = "00:00"
+            }
+            }, 1000);  
+            })
+    </script>
+</body>
+</html>
