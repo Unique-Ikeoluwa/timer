@@ -18,12 +18,14 @@
                 <a href="" class="font-medium text-base bg-gradient-to-r rounded from-[#0292aa] to-[#a3dee4] py-1 px-1 md:px-3 shadow-md">Sign up</a>
             </div>
         </nav>
-        <div class="flex flex-col bg-[#0292aa] bg-opacity-5 justify-center items-center shadow-lg md:w-2/4 mx-auto py-6 mt-24 md:mt-44">
+        <form action="">
+            <div class="flex flex-col bg-[#0292aa] bg-opacity-5 justify-center items-center shadow-lg md:w-2/4 mx-auto py-6 mt-24 md:mt-44">
             <h2 id="timing" class="font-bold text-5xl text-gray-100">00:00</h2>
             <img src="/dist/img/download__3_-removebg-preview.png" class="mb-4" alt="">
-            <input type="number" id="time" placeholder="Input time in minute" class="p-2 mb-2 text-base rounded border border-gray-400 h-10 w-44 hover:border-2 hover:ease-in-out hover:delay-200 focus:outline-none focus:border-gray-500">
-            <input type="button" id="start" class="py-1 px-3 mb-3 shadow-lg text-lg text-gray-100 w-28 font-medium bg-gradient-to-r rounded from-[#a3dee4] to-[#0292aa] hover:font-bold" value="Start">
+            <input type="text" id="time" placeholder="00:00" class="p-2 mb-2 text-base rounded border border-gray-400 h-10 w-44 hover:border-2 hover:ease-in-out hover:delay-200 focus:outline-none focus:border-gray-500">
+            <input type="submit" id="start" class="py-1 px-3 mb-3 shadow-lg text-lg text-gray-100 w-28 font-medium bg-gradient-to-r rounded from-[#a3dee4] to-[#0292aa] hover:font-bold" value="Start">
         </div>
+        </form>
         <footer class="flex justify-center items-center mt-56">
             <p class="text-gray-100 text-sm md:text-md">© 2025 Unique —
                 <a href="https://github.com/Unique-Ikeoluwa/timer" rel="noopener noreferrer" class="text-white ml-1" target="_blank">@ikeoluwa-unique</a>
@@ -34,16 +36,26 @@
         let start = document.getElementById("start")
         let timing = document.getElementById("timing")
         start.addEventListener("click", (e) =>{
-            e.preventDefault
-            let time = document.getElementById("time").value * 60
+            e.preventDefault()
+            let input = document.getElementById("time").value;
+            let parts = input.split(":");
+            if (parts.length !== 2) 
+            return alert("Enter time in mm:ss format");
+            let minutes = parseInt(parts[0], 10);
+            let seconds = parseInt(parts[1], 10);
+            let time = minutes * 60 + seconds;
+
             let interval = setInterval(() => {
-            timing.innerHTML = `${time}`
-            time--;
-            if (time <  0) {
-                clearInterval(timing.innerHTML);
-                timing.innerText = "00:00"
-            }
+                let min = Math.floor((time % 3600) / 60);
+                let sec = time % 60
+                timing.innerText = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`
+                time--;
+                if (time <  0) {
+                    clearInterval(interval);
+                    timing.innerText = "00:00"
+                }
             }, 1000);  
+            document.getElementById("time").value = ""
             })
     </script>
 </body>
